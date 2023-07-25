@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <title>JS Drum Kit</title>
+  <meta name="description" content="JavaScript Drum Kit">
+  <meta name="keywords" content="HTML, CSS, JavaScript, Drum Kit">
+  <meta name="author" content="Harshit Singh">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="https://fav.farm/🔥" />
 </head>
@@ -60,31 +64,33 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
-  let selecteddiv = document.getElementsByClassName('key')
+  
+  const keys = document.querySelectorAll('.key');
+  const audioElements = document.querySelectorAll('audio');
 
-  function handleTransition(ele){
-    ele.classList.add("playing")
-    setInterval(()=>{
-      ele.classList.remove('playing')
-    },70)
+  function handleTransition(e) {
+    const keyElement = e.type === 'click' ? e.currentTarget : document.querySelector(`div[data-key="${e.keyCode}"]`);
+    if (!keyElement) return
+    keyElement.classList.add("playing");
+    setTimeout(() => keyElement.classList.remove('playing'), 70);
   }
 
-  for(let i=0;i<selecteddiv.length;i++){
-    selecteddiv[i].addEventListener('click',function(e){
-      selecteddivkey = selecteddiv[i].attributes['data-key'].value
-      let audioele = document.querySelector(`audio[data-key='${selecteddivkey}']`)
-      audioele.play()
-
-      handleTransition(selecteddiv[i])
-    })
+  function playSound(key) {
+    const audioElement = document.querySelector(`audio[data-key="${key}"]`);
+    if (!audioElement) return;
+    audioElement.play();
   }
-  document.addEventListener('keydown',function(e){
-    let audioele = document.querySelector(`audio[data-key='${e.keyCode}']`)
-    let divele = document.querySelector(`div[data-key='${e.keyCode}']`)
-    audioele.play()
-    
-    handleTransition(divele)
-  })
+
+  keys.forEach(key => key.addEventListener('click', (e) => {
+    const dataKey = e.currentTarget.dataset.key;
+    playSound(dataKey);
+    handleTransition(e);
+  }));
+
+  window.addEventListener('keydown', (e) => {
+    playSound(e.keyCode);
+    handleTransition(e);
+  });
   
 </script>
 </body>
