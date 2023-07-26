@@ -66,30 +66,30 @@
 <script>
   
   const keys = document.querySelectorAll('.key');
-  const audioElements = document.querySelectorAll('audio');
-
-  function handleTransition(e) {
-    const keyElement = e.type === 'click' ? e.currentTarget : document.querySelector(`div[data-key="${e.keyCode}"]`);
-    if (!keyElement) return
-    keyElement.classList.add("playing");
-    setTimeout(() => keyElement.classList.remove('playing'), 70);
-  }
-
+  
   function playSound(key) {
     const audioElement = document.querySelector(`audio[data-key="${key}"]`);
+    const keyElement = document.querySelector(`.key[data-key="${key}"]`);
+    
     if (!audioElement) return;
+    keyElement.classList.add("playing");
+    audioElement.currentTime = 0 //rewind to start
     audioElement.play();
   }
 
   keys.forEach(key => key.addEventListener('click', (e) => {
     const dataKey = e.currentTarget.dataset.key;
     playSound(dataKey);
-    handleTransition(e);
   }));
+
+  //instead of setTimeout, use this
+  keys.forEach(key => key.addEventListener('transitionend',function(e){
+    if(e.propertyName !== 'transform') return;
+    this.classList.remove('playing')
+  }))
 
   window.addEventListener('keydown', (e) => {
     playSound(e.keyCode);
-    handleTransition(e);
   });
   
 </script>

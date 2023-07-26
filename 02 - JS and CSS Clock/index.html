@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="JavaScript CSS Clock">
+  <meta name="keywords" content="HTML, CSS, JavaScript, Clock">
+  <meta name="author" content="Harshit Singh">
+  <title>JS + CSS Clock</title>
+  <link rel="icon" href="https://fav.farm/🔥" />
+</head>
+<body>
+  <div class="clock-container">
+
+    <h2 id="header-time"></h2>
+  
+    
+    <div class="clock">
+        <div class="clock-face">
+          <div class="hand hour-hand"></div>
+          <div class="hand min-hand"></div>
+          <div class="hand second-hand"></div>
+        </div>
+      </div>
+  </div>
+
+
+  <style>
+    html {
+      background-color: rgb(155, 255, 255);
+      background-size: cover;
+      font-family: 'helvetica neue';
+      text-align: center;
+      font-size: 10px;
+    }
+
+    body {
+      margin: 0;
+      font-size: 2rem;
+      display: flex;
+      flex: 1;
+      min-height: 100vh;
+      align-items: center;
+    }
+
+    .clock-container{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      margin: 50px auto;
+    }
+    .clock {
+      width: 30rem;
+      height: 30rem;
+      border: 20px solid white;
+      border-radius: 50%;
+      position: relative;
+      padding: 2rem;
+      box-shadow:
+        0 0 0 4px rgba(0,0,0,0.1),
+        inset 0 0 0 3px #EFEFEF,
+        inset 0 0 10px black,
+        0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .clock-face {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform: translateY(-3px); /* account for the height of the clock hands */
+    }
+
+    .hand {
+      width: 50%;
+      background: black;
+      position: absolute;
+      top: 50%;      
+      height: 6px;
+      
+      transform-origin: 100%;
+      transform: rotate(90deg);
+      transition-timing-function: cubic-bezier(.2,2.73,.58,1);
+    }
+      .second-hand{
+        height: 2px;
+      } 
+      
+      
+  </style>
+
+  <script>
+    const hourhand = document.querySelector('.hour-hand')
+    const minhand = document.querySelector('.min-hand')
+    const sechand = document.querySelector('.second-hand')
+    const headertime = document.querySelector('#header-time')
+
+    function setHands(){
+      const time = new Date()
+      //here 90 is the initial offset put in transform property
+      
+      const sec = time.getSeconds()
+      const secdeg = (sec * (360/60) ) + 90;  
+      sechand.style.transition = (secdeg === 90) ? 'all 0s' : 'all 0.5s';
+      sechand.style.transform = `rotate(${secdeg}deg)`; 
+      
+      const min = time.getMinutes()
+      const mindeg = (min + sec / 60) * 6 + 90;
+      minhand.style.transform = `rotate(${mindeg}deg)`; 
+      minhand.style.transition = (mindeg === 90) ? 'all 0s' : 'all 0.5s';
+
+      
+      const hour = time.getHours()
+      const hourdeg = (hour % 12 + ( min / 60)) * 30 + 90;
+      hourhand.style.transform = `rotate(${hourdeg}deg)`; 
+      (hourdeg === 90) ? (hourhand.style.transition = 'all 0s') :(hourhand.style.transition = 'all 0.5s')
+      
+      let ampm = hour >= 12 ? 'PM' : 'AM';
+      headertime.innerText = `${hour%12}:${min}:${sec} ${ampm}`;
+    }
+    
+    setInterval(setHands,1000)
+
+   
+  </script>
+</body>
+</html>
