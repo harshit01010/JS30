@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="JavaScript,Console Tricks">
+  <meta name="keywords" content="JavaScript, Console Tricks,warn,error,info,assert,clear,group,count,time">
+  <meta name="author" content="Harshit Singh">
+  <title>Console Tricks!</title>
+  <link rel="icon" href="https://fav.farm/🔥" />
+</head>
+<body>
+  <p></p>
+
+  <script>
+
+    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 },{ name: 'rocky', age: 10 }];
+
+    // Interpolated
+    console.log('Hello %s','world')
+
+    // Styled
+    console.log('%c Hello world','font-size:30px; text-shadow:6px 5px 0 rgba(0,255,0,0.3);')
+
+    // warning!
+    console.warn('Life Sucks!')
+    
+    // Error :|
+    console.error('No Life Found!!')
+
+    // Info
+    console.info('There is no meaning to life')
+    
+    // Testing
+    //only shows false things 
+    console.assert(1 === 1,'That is correct')
+    console.assert(1 === 2,'That is not not wrong')
+
+    // clearing
+    // console.clear()
+    
+    // Viewing DOM Elements
+    const p = document.querySelector('p')
+    // console.dir(p)
+
+    // Grouping together
+    dogs.forEach(dog => {
+      // console.group(`${dog.name}`)
+      console.groupCollapsed(`${dog.name}`)
+        console.log(`This is ${dog.name}`)
+        console.log(`${dog.name} is ${dog.age} years old`)
+      console.groupEnd(`${dog.name}`)
+    })
+    // counting
+    console.count('count2')
+    console.count('count1')
+    console.count('count1')
+    console.count('count2')
+    console.count('count2')
+    console.count('count1')
+
+    // timing
+    console.time('some-timing-function')
+    setTimeout(()=>{
+      console.timeEnd('some-timing-function')
+    },2000)
+
+
+    //table
+    console.table(dogs)
+  </script>
+</body>
+</html>
