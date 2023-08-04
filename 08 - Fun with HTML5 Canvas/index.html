@@ -11,40 +11,89 @@
 
 
 <body>
-  <canvas id="draw" width="800" height="800"></canvas>
+  <div>
+    <canvas id="text" width="800" height="100"></canvas>
+  </div>
 
+  <div class="buttons">
+    <button id="clear">Clear</button>
+    
+    <div>
+      <label for="composite">Choose blend Mode:</label>
+      <select name="composite" id="composite">
+        <option value="source-over" selected>Interesting</option>
+        <option value="destination-over">Okay</option>
+        <option value="lighter">Weird</option>
+        <option value="multiply">Great</option>
+        <option value="xor">Awesome</option>
+      </select>
+    </div>
+  </div>
+  
+  <div>
+    <canvas id="draw" width="800" height="800"></canvas>
+  </div>
+  
   <script>
+    const clear = document.getElementById("clear")
+    const composite = document.getElementById("composite")
     const canvas = document.querySelector('#draw')
+    const canvas2 = document.querySelector('#text')
     const ctx = canvas.getContext('2d')
     canvas.width = window.innerWidth  
     canvas.height = window.innerHeight  
 
+
+    
+    composite.addEventListener("change",function(){
+      ctx.globalCompositeOperation = composite.value
+    })
+
+    window.addEventListener("resize", function() {
+      canvas.width = window.innerWidth
+      canvas.height = window.innerHeight
+      ctx.strokeStyle = '#BADA55';
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
+      ctx.lineWidth = 40;
+    })
     ctx.strokeStyle = '#BADA55';
     ctx.lineJoin = 'round';
     ctx.lineCap = 'round';
     ctx.lineWidth = 40;
 
-    //blend-mode
-    // ctx.globalCompositeOperation = 'multiply'
-
     let isDrawing = true
-    let lastX = 0 
-    let lastY = 0
+    let lastX 
+    let lastY
 
     let hue = 0
     let direction = false
 
+    
+
+    const context = canvas2.getContext('2d');
+    context.font = "30px Verdana";   
+
+    const gradient = context.createLinearGradient(0, 0, canvas2.width, 0);
+    gradient.addColorStop("0", "magenta");
+    gradient.addColorStop("0.5", "blue");
+    gradient.addColorStop("1.0", "red");
+
+    context.strokeStyle = gradient;
+    context.strokeText("Have fun with this Canvas!", 15,50); 
+
+    clear.addEventListener("click",function(){
+      const context = canvas.getContext('2d');
+      context.clearRect(0, 0, canvas.width, canvas.height);
+    })
+
     function draw(e){
       if(!isDrawing) return
-      // console.log(e)
       
       ctx.strokeStyle = `hsl(${hue},100%,50%)`
-      // ctx.lineWidth = hue
 
       ctx.beginPath();
-      //start from
       ctx.moveTo(lastX,lastY);
-      //go to 
       ctx.lineTo(e.offsetX,e.offsetY);
       ctx.stroke();
 
@@ -59,7 +108,6 @@
 
       (direction) ? (ctx.lineWidth++) : (ctx.lineWidth--)
 
-      console.log(ctx.lineWidth)
     }
     
     canvas.addEventListener('mousedown', (e) => {
@@ -80,6 +128,22 @@
     <style>
       html, body {
         margin: 0;
+      }
+
+      body{
+        display: flex;
+        flex-direction: column;
+      }
+
+      button,select{
+        padding: 10px 20px;
+        font-size: medium;
+      }
+
+      .buttons{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
       }
     </style>
 
