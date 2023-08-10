@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Html, Css, JavaScript, Strings, Arrays and Objects Referencing and Copying">
+  <meta name="keywords" content="JavaScript,Strings, Arrays, Objects, Referencing, Copying">
+  <meta name="author" content="Harshit Singh">
+  <title>JS Reference VS Copy</title>
+  <link rel="icon" href="https://fav.farm/🔥" />
+</head>
+<body>
+
+  <script>
+    //strings, numbers and booleans
+    //This makes a copy
+    //any change not get reflected in original one
+
+    let age = 100
+    let age2 = age
+    console.log(age,age2)
+    age = 200
+    console.log(age,age2)
+
+    let name = 'hello'
+    let name2 = name
+
+    console.log(name,name2)
+    name = 'world'
+    console.log(name,name2)
+
+    //array
+    // here not a copy is made
+    // instead a reference to original array is made
+    // So, any change gets reflected in original one
+
+    const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+    
+    const team = players;
+    console.log(team)
+    team[1] = 'Bob'
+    console.log(team, players)
+
+    // To take a copy
+    // one way
+    const team2 = players.slice()
+    team2[1] = 'Dave'
+    console.log(team2, players)
+
+    // or create a new array and concat the old one in
+    const team3 = [].concat(players)
+    team3[1] = 'Mary'
+    console.log(team3,players)
+
+    // or use the new ES6 Spread
+    const team4 = [...players];
+    team4[1] = 'Karen'
+    console.log(team4,players)
+
+    // or use the Array.from()
+    const team5 = Array.from(players)
+    team5[1] = 'John'
+    console.log(team5,players)
+
+
+    // The same thing goes for objects
+    // Reference is passed
+    const person = {
+      name: 'Wes Bos',
+      age: 80
+    };
+
+    const person2  = person;
+    person2.age = 11
+    console.log(person,person2)
+
+    //To make a copy
+    const person3 = Object.assign({},person,{age:18,gender:'Male'})
+    console.log(person,person3)
+
+    // To note - this is only 1 level deep
+    // both for Arrays and Objects. 
+    const newPerson = {
+      age:20,
+      name: {
+        firstName : 'Itachi',
+        lastName : 'Uchiha'
+      }
+    }
+    const new2 = Object.assign({},newPerson)
+    new2.name.firstName = 'Sasuke'
+    // meaning this will change both original as well as copy array
+    // even when used Object.assign()
+    console.log(newPerson,new2)
+
+    // 
+    const new3 = JSON.parse(JSON.stringify(newPerson))
+    new3.name.firstName = 'Madira'
+    console.log(newPerson,new3)
+  </script>
+
+</body>
+</html>
