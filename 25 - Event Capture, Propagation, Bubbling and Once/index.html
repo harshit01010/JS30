@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Html,Css,JavaScript,Event Capture, Event Propagation, Bubbling, Once">
+  <meta name="keywords" content="Html,Css,JavaScript,Event Capture, Event Propagation, Bubbling, Once">
+  <meta name="author" content="Harshit Singh">
+  <title>Understanding JavaScript's Capture</title>
+  <link rel="icon" href="https://fav.farm/🔥" />
+</head>
+<body class="body">
+
+  <div class="one">
+    <div class="two">
+      <div class="three">
+      </div>
+    </div>
+  </div>
+
+<style>
+  html {
+    box-sizing: border-box;
+  }
+
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+
+  div {
+    width: 100%;
+    padding: 100px;
+  }
+
+  .one {
+    background: thistle;
+  }
+
+  .two {
+    background: mistyrose;
+  }
+
+  .three {
+    background: coral;
+  }
+</style>
+
+<button>CLICK ME</button>
+<script>
+
+  const divs = document.querySelectorAll('div')
+  const button = document.querySelector('button')
+
+  function logIt(e) {
+
+    //Depending on capture value
+    //stop bubbling upwards OR
+    //stop capturing downwards
+    e.stopPropagation(); 
+    
+
+    //this will show the clicked div, as well as all its parent 
+    //it will trigger click on all elements
+    //this is called as Bubbling -> ripple upwards,till top, in the document tree
+    console.log(this)
+  }
+
+  // Capture -> starts from top of tree, goes top-down, listening on every elem
+  //find the elem u clicked, then bubbles upwards, and triggering the events
+  document.body.addEventListener('click',logIt)
+  
+  //this will run the function on bubble up
+  //capture by default false
+  divs.forEach(div => div.addEventListener('click',logIt))
+  
+  //this will run the function on capture down
+  // divs.forEach(div => div.addEventListener('click',logIt,{
+  //   capture: true
+  // }))
+
+  //once -> unbinds(removes) the event after performing once
+  button.addEventListener('click',() => {
+    console.log('Clicked')
+  },{
+    once: true
+  })
+
+
+</script>
+</body>
+</html>
