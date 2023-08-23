@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Html,Css,JavaScript,">
+  <meta name="keywords" content="Html,Css,JavaScript,Custom Nav">
+  <meta name="author" content="Harshit Singh">
+  <title>Follow Along Nav</title>
+  <link rel="icon" href="https://fav.farm/🔥" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>Heading</h2>
+
+  <nav class="top">
+
+    <div class="dropdownBackground">
+      <span class="arrow"></span>
+    </div>
+
+    <ul class="cool">
+      <li>
+        <a href="#">About</a>
+        <div class="dropdown dropdown1">
+          <div class="bio">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec ex turpis. 
+              Pellentesque quis purus malesuada, ullamcorper urna eget, posuere ipsum. 
+              Donec vel quam accumsan, tincidunt nisi eu, iaculis ipsum. 
+              Cras accumsan arcu nec malesuada rutrum. 
+              Maecenas nec sodales felis, ut venenatis orci. 
+              Aliquam ultricies id purus at efficitur.
+            </p>
+          </div>
+        </div>
+      </li>
+      <li>
+        <a href="#">Courses</a>
+        <ul class="dropdown courses">
+          <li>
+            <span class="code">RFB</span>
+            <a href="#!">React For Beginners</a>
+          </li>
+          <li>
+            <span class="code">ES6</span>
+            <a href="#!">ES6 For Everyone</a>
+          </li>
+          <li>
+            <span class="code">NODE</span>
+            <a href="#!">Learn Node</a>
+          </li>
+          <li>
+            <span class="code">STPU</span>
+            <a href="#!">Sublime Text Power User</a>
+          </li>
+          <li>
+            <span class="code">WTF</span>
+            <a href="#!">What The Flexbox?!</a>
+          </li>
+          <li>
+            <span class="code">GRID</span>
+            <a href="#!">CSS Grid</a>
+          </li>
+          <li>
+            <span class="code">LRX</span>
+            <a href="#!">Learn Redux</a>
+          </li>
+          <li>
+            <span class="code">CLPU</span>
+            <a href="#!">Command Line Power User</a>
+          </li>
+          <li>
+            <span class="code">MMD</span>
+            <a href="#!">Mastering Markdown</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">Other Links</a>
+        <ul class="dropdown dropdown3">
+          <li><a class="button" href="http://twitter.com">Twitter</a></li>
+          <li><a class="button" href="http://facebook.com">Facebook</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+
+<script>
+
+  const triggers = document.querySelectorAll('.cool > li')
+  const background = document.querySelector('.dropdownBackground')
+  const nav = document.querySelector('.top')
+
+  function handleEnter() {
+    this.classList.add('trigger-enter') 
+    
+    setTimeout(() => this.classList.contains('trigger-enter') && 
+      this.classList.add('trigger-enter-active'), 150)
+    
+    background.classList.add('open')
+
+    const dropdown = this.querySelector('.dropdown')
+    const dropdownCoords = dropdown.getBoundingClientRect()
+    const navCoords = nav.getBoundingClientRect()
+
+    const coords = {
+      height: dropdownCoords.height,
+      width : dropdownCoords.width,
+      top: dropdownCoords.top - navCoords.top,
+      left: dropdownCoords.left - navCoords.left
+    }
+
+    background.style.setProperty('width',`${coords.width}px`)
+    background.style.setProperty('height',`${coords.height}px`)
+    background.style.setProperty('transform',`translate(${coords.left}px,${coords.top}px)`)
+  }
+  
+  function handleLeave() {
+    this.classList.remove('trigger-enter')
+    this.classList.remove('trigger-enter-active')
+    background.classList.remove('open')
+  }
+
+  triggers.forEach(trigger => trigger.addEventListener('mouseenter',handleEnter))
+  triggers.forEach(trigger => trigger.addEventListener('mouseleave',handleLeave))
+</script>
+
+</body>
+</html>
