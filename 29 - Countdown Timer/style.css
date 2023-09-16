@@ -61,6 +61,18 @@ body {
   padding: 2rem;
 }
 
+.stopbtn {
+  display: none;
+}
+
+.appear {
+  display: block;
+  padding: 15px 15px;
+  font-size: 20px;
+  border-radius: 10px;
+  width: fit-content;
+}
+
 .timer__button {
   background: none;
   border: 0;

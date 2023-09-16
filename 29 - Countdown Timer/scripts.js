@@ -1,5 +1,6 @@
 const timerDisplay = document.querySelector('.display__time-left')
 const endTime = document.querySelector('.display__end-time')
+const stopbtn = document.querySelector('.stopbtn')
 const buttons = document.querySelectorAll('[data-time]')
 const audioElement = document.querySelector(`audio[data-sound]`);
 
@@ -30,6 +31,7 @@ function timer(seconds) {
             audioElement.loop = true
             audioElement.play()
             timerDisplay.classList.add('alert')
+            stopbtn.classList.add('appear')
             
             return
         }
@@ -77,3 +79,9 @@ document.customForm.addEventListener('submit',function(e) {
     this.reset()
 })
 
+stopbtn.addEventListener('click',function(){
+    timerDisplay.classList.remove('alert')
+    audioElement.pause()
+    audioElement.currentTime = 0
+    stopbtn.classList.remove('appear')
+})
