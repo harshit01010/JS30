@@ -15,8 +15,8 @@ body {
     font-weight: bold;
     font-family: 'Papyrus','Courier New', cursive;
     text-align: center;
-    margin-top: 70px;
-    margin-bottom: 50px;
+    width: max-content;
+    margin: 50px auto;
     text-shadow: 3px 10px 10px #1e1d1d;
 }
 
@@ -71,6 +71,8 @@ body {
     padding: 5px 5px;
     margin: 5px 5px;
     font-size: 25px;
+    font-family: 'Courier New','Garamond','Times New Roman';
+    font-weight: bold;
 }
 
 .exercise-title:hover {
@@ -95,6 +97,7 @@ body {
     border: 1px solid;
     padding: 5px 15px;
     border-radius: 20px;
+    border-color: black;
 }
 
 .exercise-link-github,.exercise-link-demo {

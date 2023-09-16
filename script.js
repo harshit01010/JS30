@@ -52,17 +52,19 @@ listexercises.forEach((exerciseTitle, index) => {
     const exerciseLinks = document.createElement('div');
     exerciseLinks.classList.add('exercise-links');
 
-    const demoLinkWrapper = document.createElement('div');
-    demoLinkWrapper.classList.add('exercise-link-demo');
-
-    const demoImage = document.createElement('img');
-    demoImage.src = './assets/preview.png';
-    demoImage.alt = 'Preview Image';
-
     const demoLink = document.createElement('a');
     demoLink.setAttribute("target","_blank")
     demoLink.href = `https://harshit01010.github.io/JS30/${exerciseTitle}/index.html`;
-    demoLink.textContent = 'Preview';
+    
+    const demoLinkWrapper = document.createElement('div');
+    demoLinkWrapper.classList.add('exercise-link-demo');
+    
+    const demoImage = document.createElement('img');
+    demoImage.src = './assets/preview.png';
+    demoImage.alt = 'Preview Image';
+    
+    const demoText = document.createElement('span');
+    demoText.textContent = 'Preview';
 
     const githubLinkWrapper = document.createElement('div');
     githubLinkWrapper.classList.add('exercise-link-github');
@@ -74,16 +76,22 @@ listexercises.forEach((exerciseTitle, index) => {
     const githubLink = document.createElement('a');
     githubLink.setAttribute("target","_blank")
     githubLink.href = `https://github.com/harshit01010/JS30/tree/main/${exerciseTitle}`;
-    githubLink.textContent = 'Github';
+    
+    const githubText = document.createElement('span');
+    githubText.textContent = 'Github';
 
     demoLinkWrapper.appendChild(demoImage);
-    demoLinkWrapper.appendChild(demoLink);
+    demoLinkWrapper.appendChild(demoText);
+
+    demoLink.appendChild(demoLinkWrapper);
 
     githubLinkWrapper.appendChild(githubImage);
-    githubLinkWrapper.appendChild(githubLink);
+    githubLinkWrapper.appendChild(githubText);
 
-    exerciseLinks.appendChild(demoLinkWrapper);
-    exerciseLinks.appendChild(githubLinkWrapper);
+    githubLink.appendChild(githubLinkWrapper);
+
+    exerciseLinks.appendChild(demoLink);
+    exerciseLinks.appendChild(githubLink);
 
     exerciseWrapper.appendChild(exerciseImage);
     exerciseWrapper.appendChild(exerciseTitleElement);
