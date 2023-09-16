@@ -1,0 +1,112 @@
+body {
+    padding: 0px;
+    margin: 0px;
+}
+html,body {
+    box-sizing: inherit;
+}
+
+body {
+    background: linear-gradient(90deg, rgb(17, 146, 245) 5%, rgb(139, 102, 241) 100%);
+}
+
+.heading-title {
+    font-size: 7vw;
+    font-weight: bold;
+    font-family: 'Papyrus','Courier New', cursive;
+    text-align: center;
+    margin-top: 70px;
+    margin-bottom: 50px;
+    text-shadow: 3px 10px 10px #1e1d1d;
+}
+
+.heading-title:hover {
+    transition: 0.5s ease-in-out;
+    transform: scale(0.9);
+}
+
+.heading-subscript {
+    text-align: center;
+    font-style: italic;
+    font-size: 20px;
+    padding: 0px 20px;
+}
+
+.all-exercises-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    border-style: dotted dashed;
+    border: 2px;
+    border-radius: 10px;
+    padding: 15px 10px;
+}
+
+.exercise-wrapper {
+    background-color: rgb(64, 250, 250);
+    padding: 20px 20px;
+    border-radius: 10px;
+    margin: 10px 20px;
+    box-shadow: 10px 10px 13px 0px rgba(0,0,0,0.64);
+}
+
+.exercise-image {
+    width: 400px;
+    height: 200px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+
+.exercise-image:hover {
+    transform: scale(1.05);
+    transition: .5s ease-in-out;
+}
+
+.exercise-title {
+    text-align: center;
+    padding: 5px 5px;
+    margin: 5px 5px;
+    font-size: 25px;
+}
+
+.exercise-title:hover {
+    transform: skew(12deg, -3deg);
+}
+
+.exercise-links {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 5px 5px;
+    margin: 5px 5px;
+    font-size: 20px;
+}
+
+.exercise-links a {
+    text-decoration: none;
+    color: white;
+}
+
+.exercise-links div {
+    border: 1px solid;
+    padding: 5px 15px;
+    border-radius: 20px;
+}
+
+.exercise-link-github,.exercise-link-demo {
+    display: flex;
+    align-items: center;
+    background-color: #4281f8;
+}
+
+.exercise-link-github img,.exercise-link-demo img {
+    margin: 0px 5px;
+} 
+
+.exercise-links div:hover {
+    opacity: 0.6;
+}
